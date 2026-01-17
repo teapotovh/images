@@ -14,6 +14,8 @@ RUN apk add --no-cache \
     curl \
     xz
 
+RUN sed -i '/Plugin::\(AWL\|AntiVirus\)/s/^#//' /etc/mail/spamassassin/v310.pre
+
 # Install s6-overlay
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz /tmp
 RUN tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz
