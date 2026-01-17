@@ -9,6 +9,7 @@ RUN apk add --no-cache \
     spamassassin-client \
     gnupg \
     perl-net-dns \
+    perl-dbd-pg \
     perl-mail-spf \
     curl \
     xz
