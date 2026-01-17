@@ -1,0 +1,34 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        run: |
+          TAG=${{ github.ref_name }}
+          for image in $(ls -d); do
+            BUILT_IMAGE=ghcr.io/${{ github.repository_owner }}/$image:latest
+            IMAGE=ghcr.io/${{ github.repository_owner }}/$image:$TAG
+            docker build $image -t $IMAGE
+
+            docker tag $BUILT_IMAGE $IMAGE
+            docker push $IMAGE
+            docker push $BUILT_IMAGE
+          done
