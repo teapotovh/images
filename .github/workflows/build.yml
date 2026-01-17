@@ -23,10 +23,12 @@ jobs:
       - name: Build and push Docker image
         run: |
           TAG=${{ github.ref_name }}
-          for image in $(ls -d); do
+          for image in ./*/; do
+            image=${image%*/}
+            image=${image##*/}
             BUILT_IMAGE=ghcr.io/${{ github.repository_owner }}/$image:latest
             IMAGE=ghcr.io/${{ github.repository_owner }}/$image:$TAG
-            docker build $image -t $IMAGE
+            docker build $image -t $BUILT_IMAGE
 
             docker tag $BUILT_IMAGE $IMAGE
             docker push $IMAGE
