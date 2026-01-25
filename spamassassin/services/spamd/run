@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-exec spamd -u mail -g mail --syslog=stderr -i 0.0.0.0 --allowed-ips 0.0.0.0/0
+exec spamd -u mail -g mail --syslog=mail -i 0.0.0.0 --allowed-ips 0.0.0.0/0 >/dev/null 2>&1

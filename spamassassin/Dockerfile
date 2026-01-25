@@ -53,6 +53,7 @@ COPY services/ /etc/s6-overlay/s6-rc.d/
 
 # Make the user bundle depend on spamd and cron
 RUN mkdir -p /etc/s6-overlay/s6-rc.d/user/contents.d && \
+    touch /etc/s6-overlay/s6-rc.d/user/contents.d/syslogd && \
     touch /etc/s6-overlay/s6-rc.d/user/contents.d/spamd && \
     touch /etc/s6-overlay/s6-rc.d/user/contents.d/spamass-milter && \
     touch /etc/s6-overlay/s6-rc.d/user/contents.d/cron
