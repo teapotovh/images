@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-exec openarc -p inet:0.0.0.0:8892 -c /etc/openarc.conf -f
+exec openarc -c /etc/openarc.conf -f
