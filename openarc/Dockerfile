@@ -3,7 +3,6 @@ ARG ALPINE_VERSION="3.23"
 FROM alpine:${ALPINE_VERSION} AS builder
 
 RUN apk add --no-cache \
-    git \
     build-base \
     autoconf \
     automake \
@@ -17,7 +16,9 @@ RUN apk add --no-cache \
 WORKDIR /build
 
 RUN mkdir /dest
-RUN git clone https://github.com/flowerysong/OpenARC.git . && \
+RUN wget https://github.com/flowerysong/OpenARC/releases/download/v1.3.0/openarc-1.3.0.tar.gz && \
+    tar xzf openarc-1.3.0.tar.gz --strip-components=1 && \
+    rm openarc-1.3.0.tar.gz && \
     autoreconf -fiv && \
     ./configure --prefix=/dest && \
     make && \
