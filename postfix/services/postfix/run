@@ -1,2 +1,5 @@
 #!/command/with-contenv sh
+
+postfix set-permissions
+
 exec /usr/sbin/postfix -c /etc/postfix start-fg
