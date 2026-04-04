@@ -16,9 +16,9 @@ WORKDIR /build
 RUN mkdir /dest
 RUN git clone https://github.com/andybalholm/spamass-milter.git . && \
     ./autogen.sh && \
-    ./configure --prefix=/dest && \
+    ./configure --prefix=/usr && \
     make && \
-    make install
+    make DESTDIR="/dest" install
 
 
 FROM alpine:${ALPINE_VERSION}
@@ -38,7 +38,7 @@ RUN apk add --no-cache \
     libstdc++ \
     libgcc
 
-COPY --from=builder /dest /usr
+COPY --from=builder /dest/usr /usr
 
 RUN sed -i '/Plugin::\(AWL\|AntiVirus\)/s/^#//' /etc/mail/spamassassin/v310.pre
 
