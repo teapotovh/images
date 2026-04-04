@@ -20,9 +20,9 @@ RUN wget https://github.com/flowerysong/OpenARC/releases/download/v1.3.0/openarc
     tar xzf openarc-1.3.0.tar.gz --strip-components=1 && \
     rm openarc-1.3.0.tar.gz && \
     autoreconf -fiv && \
-    ./configure --prefix=/dest && \
+    ./configure --prefix=/usr && \
     make && \
-    make install
+    make DESTDIR="/dest" install
 
 FROM alpine:${ALPINE_VERSION}
 ARG S6_OVERLAY_VERSION="3.2.0.3"
@@ -34,7 +34,7 @@ RUN apk add --no-cache \
     libmilter \
     openssl
 
-COPY --from=builder /dest /usr
+COPY --from=builder /dest/usr /usr
 
 # Install s6-overlay
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz /tmp

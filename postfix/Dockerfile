@@ -30,9 +30,14 @@ ADD https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-${CYRUS
 WORKDIR /tmp/cyrus-sasl
 RUN tar -xzf /tmp/cyrus-sasl-${CYRUS_SASL_VERSION}.tar.gz --strip=1 -C /tmp/cyrus-sasl
 
-ADD https://gitlab.alpinelinux.org/alpine/aports/-/raw/${ALPINE_VERSION}-stable/main/cyrus-sasl/gcc15.patch /tmp/cyrus-sasl
-ADD https://gitlab.alpinelinux.org/alpine/aports/-/raw/${ALPINE_VERSION}-stable/main/cyrus-sasl/sasl2-m4.patch /tmp/cyrus-sasl
-ADD https://gitlab.alpinelinux.org/alpine/aports/-/raw/${ALPINE_VERSION}-stable/main/cyrus-sasl/time-h-gcc14.patch /tmp/cyrus-sasl
+# NOTE: These URLs are blocked from github runners (they answer with code 418)
+# ADD https://gitlab.alpinelinux.org/alpine/aports/-/raw/${ALPINE_VERSION}-stable/main/cyrus-sasl/gcc15.patch /tmp/cyrus-sasl
+# ADD https://gitlab.alpinelinux.org/alpine/aports/-/raw/${ALPINE_VERSION}-stable/main/cyrus-sasl/sasl2-m4.patch /tmp/cyrus-sasl
+# ADD https://gitlab.alpinelinux.org/alpine/aports/-/raw/${ALPINE_VERSION}-stable/main/cyrus-sasl/time-h-gcc14.patch /tmp/cyrus-sasl
+
+ADD gcc15.patch /tmp/cyrus-sasl
+ADD sasl2-m4.patch /tmp/cyrus-sasl
+ADD time-h-gcc14.patch /tmp/cyrus-sasl
 
 RUN patch -p1 < gcc15.patch && \
     patch -p1 < sasl2-m4.patch && \
