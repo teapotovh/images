@@ -1,0 +1,3 @@
+#!/command/with-contenv sh
+
+saslauthd -m /var/run/saslauthd -a ldap -d 2>/dev/null
