@@ -2,4 +2,4 @@
 
 postfix set-permissions
 
-exec /usr/sbin/postfix -c /etc/postfix start-fg 2>/dev/null
+exec postfix -c /etc/postfix start-fg 2>/dev/null
