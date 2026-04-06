@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-exec spamass-milter -p inet:10017@0.0.0.0 -u mail
+exec spamass-milter -p inet:10017@0.0.0.0 -u mail -- -4

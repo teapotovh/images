@@ -1,2 +1,2 @@
 #!/command/with-contenv sh
-exec crond -f -l 2
+exec crond -f -l 8
