@@ -11,7 +11,7 @@ ARG DEPENDENCIES=bcrypt,ldap
 RUN apk add --no-cache --virtual gcc libffi-dev musl-dev && python -m venv /app/venv
 
 RUN /app/venv/bin/pip install --no-cache-dir "Radicale[${DEPENDENCIES}] @ https://github.com/Kozea/Radicale/archive/${VERSION}.tar.gz"
-RUN /app/venv/bin/pip install --no-cache-dir "Radicale-SQL @ https://github.com/koalyorg/radicale-sql/archive/main.tar.gz"
+RUN /app/venv/bin/pip install --no-cache-dir "Radicale-SQL @ https://github.com/koalyorg/radicale-sql/archive/main.tar.gz" psycopg2-binary
 
 
 FROM python:3-alpine
